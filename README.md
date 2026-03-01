@@ -7,7 +7,7 @@ This repository contains the code for a Convolutional Variational Autoencoder (C
 
 The model relies on an unsupervised learning approach. By training the CVAE to reconstruct "perfect" or bulk crystal lattices, it subsequently fails to accurately reconstruct defects. The difference between the input image and the CVAE prediction highlights the anomalies.
 
-![CVAE Defect Detection](figures/Figure9.jpg)
+![CVAE Defect Detection](Figures/Figure9.jpg)
 *Figure: The CVAE pipeline demonstrating anomaly isolation. The difference between the input STEM image and the model's prediction reveals structural defects like Sr Vacancies and Anti-Sr sites.*
 
 ## Repository Structure
@@ -27,3 +27,13 @@ cd CVAE-Anomaly-Detection
 
 # Install dependencies
 pip install -r requirements.txt
+```
+
+## Usage
+To see the model in action and generate your own difference maps:
+
+```bash
+# Run the full analysis pipeline
+python analysis_example.py
+```
+*Running this script will output a set of matplotlib figures showing the input crystal lattice, the CVAE prediction, and the resulting difference heatmaps used to isolate defects.*
