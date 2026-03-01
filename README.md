@@ -1,21 +1,29 @@
-<h1> Convolutional Neural Networks for Anomaly Detection in Scanning Transmission Electron Microscopy  </h1>
-<h4> Enea Prifti, James P. Buban, Arashdeep Thind, Robert F Klie </h4>
-<h4> University of Illinois Chicago, Department of Physics, 845 W Taylor Street, Chicago, IL 60607 </h4>
+# CVAE for Anomaly Detection in STEM Images
 
-The codes in this repository are used in the paper mentioned above to detect anomalies in the pattern of a crystal lattice 
-using a Convolutional Variational Autoencoder (CVAE) trained to reproduce that pattern. <br />
+[![Paper](https://img.shields.io/badge/Paper-Small_Journal-blue)](https://onlinelibrary.wiley.com/doi/full/10.1002/smll.202205977)
 
-These codes are written in Google Colab using `Python 3.8.15`. Each code is provided in two versions `.py` and `.ipynb`. The requirements to run the codes
-are listed in `requirements.txt`. 
+## Overview
+This repository contains the code for a Convolutional Variational Autoencoder (CVAE) designed to detect structural anomalies and point defects in Scanning Transmission Electron Microscopy (STEM) images. 
 
-`CVAE_training` - Code for training the CVAE and saving the trained model. It requires a bulk sample, which is then divided into 
-smaller sections to obtain a training set (to train the CVAE) and a testing set (to test the behavior of the CVAE on bulk samples 
-for future comparisons to distinguish bulk or anomalies). Parameters like `SIZE`, `SIGMA`, `epochs`, and `latent_dim` can be modified by the 
-user. By default, they are set to the optimal values that we found after various tests. <br />
+The model relies on an unsupervised learning approach. By training the CVAE to reconstruct "perfect" or bulk crystal lattices, it subsequently fails to accurately reconstruct defects. The difference between the input image and the CVAE prediction highlights the anomalies.
 
-`CVAE_testing` - Code we used to obtain the plots shown in the paper. It reads sets of various anomalies we created manually to 
-show the efficiency of this method in finding point defects. <br />
+![CVAE Defect Detection](figures/Figure9.jpg)
+*Figure: The CVAE pipeline demonstrating anomaly isolation. The difference between the input STEM image and the model's prediction reveals structural defects like Sr Vacancies and Anti-Sr sites.*
 
-`analysis_example` - Provides a sample code for the reader to apply our method. After running CVAE_training.py with your bulk image, 
-use analysis_exaple.py to look for anomalies in other image/images of the same crystal. It will provide a list of booleans labeling  
-if an anomaly was found in a section of the image/images inputted <br />
+## Repository Structure
+* `CVAE_training.py` / `.ipynb`: Scripts used to train the Convolutional Variational Autoencoder on bulk lattice datasets.
+* `CVAE_testing.py` / `.ipynb`: Evaluation scripts to test the trained model on images containing defects, generating difference maps.
+* `analysis_example.py` / `.ipynb`: A comprehensive pipeline combining training, testing, and plotting the final results.
+* `requirements.txt`: Required Python dependencies.
+
+## Installation
+You can run these models either locally or via Google Colab. 
+
+**Local Setup:**
+```bash
+# Clone the repository
+git clone [https://github.com/Enea77/CVAE-Anomaly-Detection.git](https://github.com/Enea77/CVAE-Anomaly-Detection.git)
+cd CVAE-Anomaly-Detection
+
+# Install dependencies
+pip install -r requirements.txt
